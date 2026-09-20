@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3d1df127263da7408feea7187a8e398, type: 3}
+  m_Name: Card_Transform_Line
+  m_EditorClassIdentifier: Assembly-CSharp::TransformLineSO
+  cardName: Line
+  cardIcon: {fileID: 0}
+  basePneumaCost: 10
+  speed: 15
+  spawnOffset: 1.2
