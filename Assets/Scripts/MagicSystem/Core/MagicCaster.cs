@@ -17,6 +17,8 @@ public class MagicCaster : MonoBehaviour
 
     public MagicCraftingUI craftingUI;
 
+    private Animator anim;
+
     private void Update()
     {
         // ⓐ & ⓑ F 키 입력 제어
@@ -49,6 +51,12 @@ public class MagicCaster : MonoBehaviour
         
         Time.timeScale = currentFactor;
         Time.fixedDeltaTime = 0.02f * Time.timeScale;
+
+        // Charge 애니메이션 트리거 실행
+        if (anim != null)
+        {
+            anim.SetTrigger("charge");
+        }
 
         if (craftingUI != null) craftingUI.OpenCraftingUI();
         Debug.Log($"[캐스팅 진입] 시간이 {Time.timeScale * 100f}% 속도로 느려집니다.");
