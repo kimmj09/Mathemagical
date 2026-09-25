@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1462df9c1ec592845aa3b9efed94f448, type: 3}
+  m_Name: Card_Trait_Split
+  m_EditorClassIdentifier: Assembly-CSharp::MagicSystem.Core.SplitTraitSO
+  cardName: split
+  cardIcon: {fileID: 0}
+  description: 
+  traitType: 1
+  splitDelay: 0.4

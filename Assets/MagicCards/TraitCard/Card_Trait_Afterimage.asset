@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ceed4df41ac86a44bf5aae7b570ada2, type: 3}
+  m_Name: Card_Trait_Afterimage
+  m_EditorClassIdentifier: Assembly-CSharp::MagicSystem.Core.AfterimageTraitSO
+  cardName: afterimage
+  cardIcon: {fileID: 0}
+  description: 
+  traitType: 1
+  spawnInterval: 0.05

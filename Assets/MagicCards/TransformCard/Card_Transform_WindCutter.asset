@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28205945d203f2242b0f7560d66e799f, type: 3}
+  m_Name: Card_Transform_WindCutter
+  m_EditorClassIdentifier: Assembly-CSharp::WindCutterCardSO
+  cardName: Wind Cutter
+  cardIcon: {fileID: 0}
+  basePneumaCost: 10
+  magicPrefab: {fileID: 8910735143870873754, guid: d241e45af58596b4d84ea124abd2f04c, type: 3}
+  baseDamageMultiplier: 1.2

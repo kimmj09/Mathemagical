@@ -3,7 +3,7 @@ using UnityEngine;
 // 원소 속성 종류
 public enum ElementType
 {
-    atmosphere,
+    wind,
     Light,
     Sphere
 }

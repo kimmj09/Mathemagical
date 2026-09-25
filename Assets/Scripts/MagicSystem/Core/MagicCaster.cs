@@ -1,4 +1,6 @@
 using UnityEngine;
+using MagicSystem.UI;
+using MagicSystem.Core;
 
 public class MagicCaster : MonoBehaviour
 {
@@ -17,7 +19,7 @@ public class MagicCaster : MonoBehaviour
 
     public MagicCraftingUI craftingUI;
 
-    private Animator anim;
+    public Animator anim;
 
     private void Update()
     {
@@ -52,11 +54,8 @@ public class MagicCaster : MonoBehaviour
         Time.timeScale = currentFactor;
         Time.fixedDeltaTime = 0.02f * Time.timeScale;
 
-        // Charge 애니메이션 트리거 실행
-        if (anim != null)
-        {
-            anim.SetTrigger("charge");
-        }
+        // Charge 애니메이션 실행
+        if (anim != null) anim.SetBool("isCasting", true);
 
         if (craftingUI != null) craftingUI.OpenCraftingUI();
         Debug.Log($"[캐스팅 진입] 시간이 {Time.timeScale * 100f}% 속도로 느려집니다.");
@@ -65,7 +64,17 @@ public class MagicCaster : MonoBehaviour
     // ⓑ F키 시전 시도 (예외 처리 포함)
     private void TryExecuteCraftedMagic()
     {
-        // 예외 처리: 원소 카드가 없거나, 변형 카드만 세팅된 경우 캐스팅 취소
+        // 1. UI 슬롯에서 현재 선택된 카드 정보 가져오기
+        if (craftingUI != null)
+        {
+            if (craftingUI.elementSlot != null)
+                currentElementCard = craftingUI.elementSlot.CurrentCardData as ElementCardSO;
+                
+            if (craftingUI.transformSlot != null)
+                currentTransformCard = craftingUI.transformSlot.CurrentCardData as TransformCardSO;
+        }
+
+        // 2. 예외 처리: 원소 카드가 선택되지 않은 경우
         if (currentElementCard == null)
         {
             Debug.Log("[연성 실패] 원소 카드가 선택되지 않아 캐스팅이 취소됩니다.");
@@ -73,7 +82,7 @@ public class MagicCaster : MonoBehaviour
             return;
         }
 
-        // 정상 조합 시전 (원소 + 변형)
+        // 3. 변형 카드가 세팅된 경우 마법 실행
         if (currentTransformCard != null)
         {
             float requiredCost = currentTransformCard.basePneumaCost;
@@ -88,7 +97,7 @@ public class MagicCaster : MonoBehaviour
                 Debug.LogWarning("프뉴마(MP)가 부족합니다!");
             }
         }
-        // 변형 카드가 없는 단일 원소 시전 예시 (필요시 조정 가능)
+        // 4. 변형 카드 없이 원소 단독 시전
         else
         {
             Debug.Log($"[{currentElementCard.cardName}] 원소 단독 시전!");
@@ -115,11 +124,21 @@ public class MagicCaster : MonoBehaviour
         currentTransformCard = null;
     }
 
+    public void RegisterQuickSlot(int slotIndex, SavedMagicRecipe recipe)
+    {
+        // 우선 연성판의 원소/변형 카드를 업데이트 (필요에 따라 퀵슬롯 배열 관리로 확장 가능)
+        currentElementCard = recipe.elementCard;
+        currentTransformCard = recipe.transformCard;
+        
+        Debug.Log($"[ MagicCaster ] 퀵슬롯 {slotIndex}번 설정 완료: {recipe.recipeName}");
+    }
+
     private void ResetTimeScale()
     {
         Time.timeScale = 1.0f;
         Time.fixedDeltaTime = 0.02f;
         isCasting = false;
+        if (anim != null) anim.SetBool("isCasting", false);
     }
 
     private void OnDisable()

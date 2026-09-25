@@ -1,16 +1,33 @@
-using System.Collections.Generic;
 using UnityEngine;
 
-// UI 및 마법 연성판에서 조립된 변수 데이터
-[System.Serializable]
-public class SavedMagicRecipe
+namespace MagicSystem.Core
 {
-    public string recipeName;           // 마법 조합 이름 (예: "대기 직선 파동")
-    public ElementCardSO elementCard;   // 선택된 원소
-    public TransformCardSO transformCard; // 선택된 변형
-    
-    // 유저가 슬라이더나 텍스트로 입력한 매개변수 값들
-    public float mass = 1f;             // 질량
-    public float speed = 15f;           // 속도
-    public Vector2 direction = Vector2.right; // 방향
+    [System.Serializable]
+    public class SavedMagicRecipe
+    {
+        public string recipeName;               // MagicCaster에서 참조하는 레시피 이름
+        public ElementCardSO elementCard;       // 원소 카드
+        public TransformCardSO transformCard;   // 변형 카드
+        public float spectrum = 0.5f;           // 튜닝 슬라이더 수치 (0.0 ~ 1.0)
+
+        // 기본 생성자
+        public SavedMagicRecipe() { }
+
+        // 매개변수를 갖는 생성자
+        public SavedMagicRecipe(string recipeName, ElementCardSO element, TransformCardSO transform, float spectrumValue)
+        {
+            this.recipeName = recipeName;
+            this.elementCard = element;
+            this.transformCard = transform;
+            this.spectrum = spectrumValue;
+        }
+
+        public void CastMagic(Transform casterTransform)
+        {
+            if (transformCard == null || elementCard == null) return;
+
+            // 저장된 스펙트럼 값 및 원소 정보를 바탕으로 마법 실행
+            transformCard.ExecuteMagic(casterTransform, elementCard);
+        }
+    }
 }
